@@ -1,0 +1,49 @@
+%ex5.02 2D Heat Eqn Point Jacopi
+clear;
+clc;
+close all;
+
+maxItterations = 1500;
+tol = 1e-4;
+omega = 1.8;
+
+M = 21;
+L = 1;
+alpha = 1;
+dx = 2*L/(M-1);
+
+%dirichilet boundary conditions (all set to 0, so no action needed)
+
+%define arrays
+x = linspace(-L,L,M);
+y = x; %same mesh size in y
+u_jacopi = zeros(M,M,maxItterations); %is a 3d matrix, x,y,t, is u(i,j) at timestamp n
+u_gausssidel = u_jacopi;
+u_SOR = u_jacopi;
+
+%defining exact solution, to use as reference to terminate loop
+[X,Y] = meshgrid(x,y); %plotting 2D array onto a contour plot 
+f = (X.^2 -1).*(Y.^2 -1);
+%contour(X,Y,f);
+%contourf(X,Y,f);
+
+%building source term
+S = 2.* (X.^2 + Y.^2 - 2);
+
+%%Implementing Point-Jacopi
+err = 1;% 0.01%percent error, shown by tol. Starts as something that doesn't meet condition
+itt = 0;
+
+while (err > tol) && (itt < maxItterations)
+    itt = itt+1;
+    for j = 2:M-1
+        for i = 2:M-1 %remember, is steady, so instead of timestep march, is ittereation step march
+            u_jacopi(i,j,itt+1) = 0.25* ( u_jacopi(i+1,j,itt) + u_jacopi(i-1,j,itt) + u_jacopi(i,j+1,itt) + u_jacopi(i,j-1,itt)...
+            -0.25*dx^2 * S(i,j));
+        end
+    end
+    %update error
+    err = ( f - u_jacopi(:,:,itt+1) )/ f
+end
+itt_jacopi = itt;
+contour(X,Y,u_jacopi(:,:,M))

@@ -1,0 +1,55 @@
+clear;
+clc;
+
+%Excersise 3.01
+
+%%Constants
+N = 21; %number of points
+L=1;
+M = 1001; %number of time steps
+
+alpha = 1;
+dt = 0.002;
+dx = L /(N-1);
+Fo = alpha*dt/(dx)^2;
+
+%%Boundary Conditions
+u0 = 0;
+uL = 0;
+
+%%Vector u
+u = zeros(N,M);
+x = linspace(0,L,N);
+%need array for system of equations
+A = zeros(N,N); %square matrix A
+%note, matrix A was almost a diagonal matrix, just add row vector [-Fo,1+2*Fo , -Fo] to each "diagonal of the matrix"
+a = - [-Fo,1+2*Fo,-Fo];
+for i = 2:N-1
+    b = zeros(1,N);
+    b(i-1:i+ (-1+length(a)) -1) = b(i-1:i+ (-1+length(a)) -1) + a; %starts at i-1, since i starts at 2
+    A(i,:) = A(i,:) + b;
+end
+A(1,1) = 1;
+A(N,N) = 1;
+A
+det(A)
+%Take inverse of A
+A_inv = inv(A)
+
+%define the source term
+s = @ % @ is a handle
+
+%%Marcing time forward
+TO = 1;
+TL = 2;
+for t_step=1:M-1 %time loop
+    t = t_step*dt;
+    for i=2:N-1 %space loop
+        u(i,t_step+1) = u(i,t_step) + Fo*( u(i+1,t_step) - 2*u(i,t_step) + u(i-1,t_step) );
+    end
+    %update boundary conditions
+    %u(1,t_step+1) = TO;
+    %u(N,t_step+1) = TL;
+end
+
+%u(:,i+1) = u(i,n) + Fo * ( u(i));

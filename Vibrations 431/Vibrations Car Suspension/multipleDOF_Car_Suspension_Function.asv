@@ -1,0 +1,25 @@
+function [z_dot] = multipleDOF_Car_Suspension_Function(t,z,y)
+m = [320,44];
+k = [3.2*10^4,1.8*10^5];
+c = [3430];
+v = 5;
+d = 1*v;
+h = 0.1;
+L = 3.7;
+%t isn't actually an array. The function gets passed one individual value
+ %of t at a time. check it out with
+t;
+length(t);
+
+% y = 0;
+% if t >= d/v && t <= (d+L)/v   
+%    y = h*sin( (pi*v/L) * (t - d/v));
+% end
+
+z_dot(1) = z(3);
+z_dot(2) = z(4);
+z_dot(3) = (1/m(1)) * ( c(1)*z(4) + k(1)*z(2) - c(1)*z(3) - k(1)*z(1) );
+z_dot(4) = (1/m(2)) * ( k(2)*y + c(1)*z(3) + k(1)*z(1) - c(1)*z(4) - (k(1)+k(2))*z(2) );
+
+z_dot = z_dot';
+end
