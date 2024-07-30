@@ -1,0 +1,39 @@
+clc;
+clear;
+close all;
+%example 4.02
+N = 41;
+L = 10;
+dx = L/(N-1);
+
+%swap his N for M, and his M for N
+
+%note, there DOES exist an exact solution to the logistic eqn
+f = @(x)( 1./(1+exp(-x)) ); %is the function of logistic eqn
+F = @(u)( u*(1-u) ); %is the derivative of logistic eqn
+
+%define initial condition
+u0 = f(L); %computing actual value at starting point
+
+%define arrays
+x = linspace(-L,L,N); %for discretized
+z = linspace(-L,L,101); %for exact
+u = zeros(N,3); %storing all three methods in the U vector, each column being for forward euler, midpoint rule, and 4th order runge-kutta
+
+%defining initial condition
+u(1,:) = u0; %ALL methods start with the same value
+
+%implement Runge-Kutta methods
+for n= 1:N-1
+    %forward euler in first column
+    u(n+1,1) = u(n,1) + dx*F( u(n,1) );
+
+    %midpoint rule in second column
+    us = u(n,2) + 0.5*F( u(n,2) )*dx; %intermediate step
+    u = u(n+1,2) + 0.5*F( us )*dx;
+
+    %4th order runge kutta
+    k1 = F( u(n,3) );
+    k2 = F( u(n,3) + 0.5*k1*dx );
+    k3 = F( u(n,3) + 0.5*k2*dx );
+end
