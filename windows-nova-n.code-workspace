@@ -1,9 +1,0 @@
-{
-	"folders": [
-		{
-			"uri": "vscode-remote://wsl+ubuntu-20.04/home/nova_n"
-		}
-	],
-	"remoteAuthority": "wsl+ubuntu-20.04",
-	"settings": {}
-}
