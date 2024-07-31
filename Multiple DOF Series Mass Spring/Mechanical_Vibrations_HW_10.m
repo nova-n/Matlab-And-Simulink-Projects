@@ -143,7 +143,7 @@ function [coupledDoFValues] = coupledDoFPlotter(A_Values, phi_Values,natFreqs,u_
     end
     lgnd= legend(legendStuff,'Location','northoutside');
     set(lgnd, 'Interpreter','latex')
-    %lgnd.Location = 'best';
+    %lgnd.Location = 'northoutside';	
     title(titled,'Interpreter','latex')
     xlabel("$ t, \ time \ (s) $",'Interpreter','latex') 
     ylabel("$X, \ position \ (m)$",'Interpreter','latex') 
