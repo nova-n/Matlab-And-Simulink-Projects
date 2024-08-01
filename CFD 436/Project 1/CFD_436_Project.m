@@ -41,7 +41,7 @@ end
 
 
 for i = 1:length(Re)
-    FigH = figure('Position', get(0, 'Screensize'));
+    FigH = figure('Position', get(0, 'Screensize'),'Color',[1 1 1]);
     tiledlayout(1,2);
 
     nexttile;
@@ -83,7 +83,7 @@ for i = 1:length(Re)
     set(lgnd, 'Interpreter','latex')
     hold off;
 
-    
+    set(gcf, 'InvertHardCopy', 'off');
     F = getframe(FigH);
     imwrite(F.cdata, strcat('centerline_Re_' , num2str( Re(i) ) , '.png'), 'png')
 end
@@ -109,7 +109,7 @@ for i = 1:length(Re)
 end
 
 for i = 1:length(Re)
-    FigH = figure('Position', get(0, 'Screensize'));
+    FigH = figure('Position', get(0, 'Screensize'),'Color',[1 1 1]);
     tiledlayout(2,1);
 
     nexttile;
@@ -140,6 +140,7 @@ for i = 1:length(Re)
     set(lgnd, 'Interpreter','latex')
     hold off;
 
+    set(gcf, 'InvertHardCopy', 'off');
     F = getframe(FigH);
     imwrite(F.cdata, strcat('residuals_Re_' , num2str( Re(i) ) , '.png'), 'png')
 end
@@ -149,7 +150,7 @@ legendStuff = ["$Paper$", "$OpenFOAM$"];
 paperData_uy = readtable('C:/Users/n8dsa/OneDrive/Documents/MATLAB/TestCaseOpenLidCavity.xlsx', 'Range', 'A3:D19');
 paperData_ux = readtable('C:/Users/n8dsa/OneDrive/Documents/MATLAB/TestCaseOpenLidCavity.xlsx', 'Range', 'F3:I19');
 for i = 1:length(Re)  
-    FigH = figure('Position', get(0, 'Screensize'));
+    FigH = figure('Position', get(0, 'Screensize'),'Color',[1 1 1]);
     tiledlayout(1,2);
 
     nexttile;
@@ -178,6 +179,7 @@ for i = 1:length(Re)
     set(lgnd, 'Interpreter','latex')
     hold off;
 
+    set(gcf, 'InvertHardCopy', 'off');
     F = getframe(FigH);
     imwrite(F.cdata, strcat('schemesComparison_Re_' , num2str( Re(i) ) , '.png'), 'png')
 end
@@ -212,7 +214,7 @@ end
 legendStuff = ["$Steady$","$Crank-Nicolson$","$Euler$","$Paper$"];
 
 for i = 1:length(Re)  
-    FigH = figure('Position', get(0, 'Screensize'));
+    FigH = figure('Position', get(0, 'Screensize'),'Color',[1 1 1]);
     tiledlayout(1,2);
 
     nexttile;
@@ -249,8 +251,9 @@ for i = 1:length(Re)
     set(lgnd, 'Interpreter','latex')
     hold off;
 
+    set(gcf, 'InvertHardCopy', 'off');
     F = getframe(FigH);
-    %imwrite(F.cdata, strcat('paperComparisons_Re_' , num2str( Re(i) ) , '.png'), 'png')
+    imwrite(F.cdata, strcat('paperComparisons_Re_' , num2str( Re(i) ) , '.png'), 'png')
 end
 
 %%Problem 5
@@ -277,7 +280,7 @@ Nx = 2000;
 Ny = 2000;
 titles = ["Steady \ State" , "Crank-Nicolson", "Euler"];
 for i = 1:3
-    FigH = figure('Position', get(0, 'Screensize'));
+    FigH = figure('Position', get(0, 'Screensize'),'Color',[1 1 1]);
     T = tiledlayout(1,3);
     for ii = 1:length(Re)
         x = table2array( A_cutPlane{i,ii}(:,1) );
@@ -312,5 +315,6 @@ for i = 1:3
     if i == 1
         titles(i) = "Steady  State";
     end
+    set(gcf, 'InvertHardCopy', 'off');
     imwrite(F.cdata, strcat('vorticities_Re_' , titles(i) , '.png'), 'png');
 end
