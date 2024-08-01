@@ -126,9 +126,7 @@ function [coupledDoFValues] = coupledDoFPlotter(A_Values, phi_Values,natFreqs,u_
     hold off;
     a = strcat("$Mass \ ", num2str(1)," \ X \ Position$");
     legendStuff = strings(1,length(A_Values)); %creates aray of empty string
-    %legendStuff(1) = strcat("$Mass \ ", num2str(1)," \ X \ Position$");
-    %legendStuff(2) = strcat("$Mass \ ", num2str(2)," \ X \ Position$");    
-    %legendStuff = [strcat("$Mass \ ",num2str(1)," \ X \ Position$"),strcat("$Mass \ ", num2str(2)," \ X \ Position$")];
+    
     for i = 1:length(A_Values)
         a = strcat("$Mass \ ", num2str(i)," \ X \ Position : \ ");
         b = "";
@@ -143,7 +141,6 @@ function [coupledDoFValues] = coupledDoFPlotter(A_Values, phi_Values,natFreqs,u_
     end
     lgnd= legend(legendStuff,'Location','northoutside');
     set(lgnd, 'Interpreter','latex')
-    %lgnd.Location = 'northoutside';	
     title(titled,'Interpreter','latex')
     xlabel("$ t, \ time \ (s) $",'Interpreter','latex') 
     ylabel("$X, \ position \ (m)$",'Interpreter','latex') 

@@ -19,9 +19,12 @@ function [frictionFactor] = coleBrook(rough,diam,reynolds,resol)
         fFric;%delete the semicolon to see in real time
         %check if leftside - rightside < tolerance, OR 
         %if it overshot, to use the previous value
-        if abs(1/sqrt(fFric) + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFric)))) < tol || abs(1/sqrt(fFric) + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFric)))) > abs(1/sqrt(fFricPrev) + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFricPrev)))) 
+        if abs(1/sqrt(fFric) + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFric)))) < tol || abs(1/sqrt(fFric)...
+                + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFric)))) > abs(1/sqrt(fFricPrev)...
+                + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFricPrev)))) 
             closeEnough = true;
-            if abs(1/sqrt(fFric) + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFric)))) > abs(1/sqrt(fFricPrev) + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFricPrev))))
+            if abs(1/sqrt(fFric) + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFric)))) > abs(1/sqrt(fFricPrev)...
+                    + 2*log10((rough/diam)/3.7+2.51/(reynolds*sqrt(fFricPrev))))
                 fFric = fFricPrev;
             end
         end   

@@ -55,7 +55,8 @@ for i = 1:length(v)
     %Finding maximum acceleration of m1, the chassis
     accel = [ (1/m(1)) * ( c(1)*z(:,4) + k(1)*z(:,2) - c(1)*z(:,3) - k(1)*z(:,1) )  , ...
         (1/m(2)) * ( k(2)*y + c(1)*z(:,3) + k(1)*z(:,1) - c(1)*z(:,4) - (k(1)+k(2))*z(:,2) ) ];
-    [maxAccel1,accIdx1] = max(abs(accel(:,1)));%note, will need abs to get max negative, but will only return pos values
+    %note, will need abs to get max negative, but will only return pos values
+    [maxAccel1,accIdx1] = max(abs(accel(:,1)));
     [maxAccel2,accIdx2] = max(abs(accel(:,2)));
     maxAccel1 = accel(accIdx1,1);
     maxAccel2 = accel(accIdx2,2);

@@ -140,16 +140,17 @@ clear;
     function [sortedNames] = nameSorting(table,catergory,number)
         top = sortrows(table, catergory, "descend");                       %Puts the most [insert variable] counties first
         top([number+1:height(top)],:) = [];                                %Everything after the top few counties is erased
-        topNames = top.County;                                             %Gathers a list of names of those counties. The previous line gathered ALL information about the county.
-        sortedNames = categorical(topNames);                               %makes the array usable elsewhere
-    end
+        topNames = top.County;                                             %Gathers a list of names of those counties. 
+        sortedNames = categorical(topNames);                               % The previous line gathered ALL information about the county.
+    end                                                                    %makes the array usable elsewhere
+   
     
 %%Indexing
     function [sortedIndex,indexOnlyTable] = indexSorting(table1,table2,counties,catergory,number,mostRecent)
         indecies = [];                                                     %Creating an array of the indexes of the counties
         if mostRecent == "yes"
             for i = 1:number
-                indecies(i) = max(find(counties == table2(i)));                %Finds the most recent index of the county in the vaccine table
+                indecies(i) = max(find(counties == table2(i)));            %Finds the most recent index of the county in the vaccine table
             end
         end
         newTable = table1;

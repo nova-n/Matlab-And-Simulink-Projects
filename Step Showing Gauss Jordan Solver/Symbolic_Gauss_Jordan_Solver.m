@@ -3,8 +3,8 @@ clear;
 
 syms s
 
-%sI_A = sym(  [[s+2,-8,-7];[-5,s+4,-2];[9,3,s+1]]  );
-%Ident = sym(  [[1,0,0];[0,1,0];[0,0,1]]  );
+sI_A = sym(  [[s+2,-8,-7];[-5,s+4,-2];[9,3,s+1]]  );
+Ident = sym(  [[1,0,0];[0,1,0];[0,0,1]]  );
 
 %%testing
 % sum( sI_A(1,:));
@@ -19,8 +19,6 @@ syms s
 % C = [7,1,2];
 % transferFunction = simplify( simplifyFraction( C * sI_A_Inv * B ) );
 
-sI_A = sym(  [[s,-1,0];[0,s-1,-2];[5,4,s+3]]  );
-Ident = sym(  [[1,0,0];[0,1,0];[0,0,1]]  );
 
 %%function call and work
 format rat
